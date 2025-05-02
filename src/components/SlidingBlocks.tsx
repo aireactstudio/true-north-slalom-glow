@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 
@@ -277,7 +276,7 @@ const SlidingBlocks = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="relative h-[320px] overflow-visible">
-            {/* Banners that appear when blocks slide */}
+            {/* Banners that appear when blocks slide - Reversed direction */}
             {banners.map((banner) => (
               <div
                 key={banner.id}
@@ -285,7 +284,7 @@ const SlidingBlocks = () => {
                 style={{
                   transform: `translateY(${banner.row * 80}px)`,
                   width: `${banner.width}px`,
-                  left: banner.active ? '240px' : '520px', // Start off-screen to the right, slide in to position
+                  left: banner.active ? '240px' : '0px', // Changed: starts from left (0px) and slides to position (240px)
                   transition: 'left 0.5s ease-out, opacity 0.5s ease-out'
                 }}
               >
