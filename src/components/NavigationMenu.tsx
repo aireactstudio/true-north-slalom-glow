@@ -218,8 +218,16 @@ const NavigationMenu = () => {
     setActiveMenu(activeMenu === menuTitle ? null : menuTitle);
   };
 
+  const handleMenuEnter = (menuTitle: string) => {
+    setActiveMenu(menuTitle);
+  };
+
+  const handleMenuLeave = () => {
+    setActiveMenu(null);
+  };
+
   return (
-    <div className="w-full bg-blue-950 shadow-lg">
+    <div className="w-full bg-blue-900" onMouseLeave={handleMenuLeave}>
       <TopNavigation />
       
       <div className="container mx-auto px-4 relative">
@@ -230,14 +238,17 @@ const NavigationMenu = () => {
             </div>
           </Link>
           
-          <nav className="hidden md:flex space-x-6">
+          <nav className="hidden md:flex space-x-8">
             {mainMenuItems.map((item) => (
-              <div key={item.title} className="relative group">
-                <button 
-                  className={`text-white py-2 flex items-center space-x-1 border-b-2 ${
-                    activeMenu === item.title ? 'border-cyan-400' : 'border-transparent'
-                  } hover:border-cyan-400`}
-                  onClick={() => handleMenuToggle(item.title)}
+              <div key={item.title} 
+                className="relative group"
+                onMouseEnter={() => item.megaMenu.length > 0 && handleMenuEnter(item.title)}
+              >
+                <Link 
+                  to={item.href} 
+                  className={`text-white py-2 flex items-center text-base font-medium space-x-1 border-b-2 ${
+                    activeMenu === item.title ? 'border-yellow-400' : 'border-transparent'
+                  } hover:border-yellow-400 transition-all duration-300`}
                 >
                   <span>{item.title}</span>
                   {item.megaMenu.length > 0 && (
@@ -245,10 +256,17 @@ const NavigationMenu = () => {
                       <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                   )}
-                </button>
+                </Link>
               </div>
             ))}
           </nav>
+          
+          <div className="hidden md:flex items-center space-x-4">
+            <Button className="bg-transparent border-2 border-white hover:bg-white hover:text-blue-900 text-white rounded-full px-6">
+              Let's talk
+            </Button>
+            <Search className="h-6 w-6 text-white cursor-pointer" />
+          </div>
         </div>
       </div>
       
@@ -257,28 +275,27 @@ const NavigationMenu = () => {
         item.megaMenu.length > 0 && (
           <div 
             key={`mega-${item.title}`}
-            className={`bg-white border-t border-gray-200 shadow-lg w-full absolute z-50 ${
-              activeMenu === item.title ? 'block' : 'hidden'
+            className={`bg-blue-900 absolute w-full left-0 z-50 overflow-hidden transition-all duration-500 ${
+              activeMenu === item.title 
+                ? 'opacity-100 max-h-[800px]' 
+                : 'opacity-0 max-h-0 pointer-events-none'
             }`}
           >
-            <div className="container mx-auto px-4 py-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            <div className="container mx-auto py-12 px-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                 {item.megaMenu.map((section, idx) => (
-                  <div key={`section-${idx}`} className="space-y-3">
-                    <h3 className="font-medium text-gray-800 border-b border-gray-200 pb-2">
+                  <div key={`section-${idx}`} className="space-y-6">
+                    <h3 className="text-yellow-400 text-xl font-medium">
                       {section.title}
                     </h3>
-                    <ul className="space-y-2">
+                    <ul className="space-y-3">
                       {section.links.map((link, linkIdx) => (
                         <li key={`link-${linkIdx}`}>
                           <Link 
                             to={link.href}
-                            className="text-gray-600 hover:text-blue-600 flex items-center"
+                            className="text-white hover:text-yellow-200 transition-colors"
                             onClick={() => setActiveMenu(null)}
                           >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1 text-blue-500">
-                              <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg>
                             {link.name}
                           </Link>
                         </li>

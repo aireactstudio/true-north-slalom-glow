@@ -7,7 +7,11 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ transparent = false }) => {
-  return <NavigationMenu />;
+  return (
+    <div className="w-full fixed top-0 left-0 z-50">
+      <NavigationMenu />
+    </div>
+  );
 };
 
 export default Navbar;
