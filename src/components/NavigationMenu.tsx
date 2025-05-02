@@ -1,10 +1,13 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search } from 'lucide-react';
+import { Search, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const TopNavigation = () => {
+  const isMobile = useIsMobile();
+  
   return (
     <div className="bg-blue-950 text-white py-2 px-4 flex justify-between items-center">
       <div className="flex space-x-4">
@@ -26,29 +29,37 @@ const TopNavigation = () => {
           </svg>
         </Link>
       </div>
-      <div className="flex items-center space-x-6">
-        <div className="hidden md:flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-          </svg>
-          <span className="text-sm">Sales: 1.855.383.4300</span>
+      {!isMobile ? (
+        <div className="flex items-center space-x-6">
+          <div className="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span className="text-sm">Sales: 1.855.383.4300</span>
+          </div>
+          <div className="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span className="text-sm">24/7 Customer Support: 1.800.372.1660</span>
+          </div>
+          <Button size="sm" className="bg-cyan-500 hover:bg-cyan-600 text-white text-xs rounded px-3 py-1">
+            See Service Pricing
+          </Button>
+          <Button variant="ghost" size="sm" className="text-white text-xs">
+            Client Login
+          </Button>
+          <Button variant="ghost" size="sm" className="text-white p-1">
+            <Search className="h-4 w-4" />
+          </Button>
         </div>
-        <div className="hidden md:flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-          </svg>
-          <span className="text-sm">24/7 Customer Support: 1.800.372.1660</span>
+      ) : (
+        <div>
+          <Button variant="ghost" size="sm" className="text-white p-1">
+            <Search className="h-4 w-4" />
+          </Button>
         </div>
-        <Button size="sm" className="bg-cyan-500 hover:bg-cyan-600 text-white text-xs rounded px-3 py-1">
-          See Service Pricing
-        </Button>
-        <Button variant="ghost" size="sm" className="text-white text-xs">
-          Client Login
-        </Button>
-        <Button variant="ghost" size="sm" className="text-white p-1">
-          <Search className="h-4 w-4" />
-        </Button>
-      </div>
+      )}
     </div>
   );
 };
@@ -213,17 +224,33 @@ const mainMenuItems = [
 
 const NavigationMenu = () => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeMobileMenu, setActiveMobileMenu] = useState<string | null>(null);
+  const isMobile = useIsMobile();
 
   const handleMenuToggle = (menuTitle: string) => {
     setActiveMenu(activeMenu === menuTitle ? null : menuTitle);
   };
 
   const handleMenuEnter = (menuTitle: string) => {
-    setActiveMenu(menuTitle);
+    if (!isMobile) {
+      setActiveMenu(menuTitle);
+    }
   };
 
   const handleMenuLeave = () => {
-    setActiveMenu(null);
+    if (!isMobile) {
+      setActiveMenu(null);
+    }
+  };
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+    setActiveMobileMenu(null);
+  };
+
+  const toggleMobileSubmenu = (menuTitle: string) => {
+    setActiveMobileMenu(activeMobileMenu === menuTitle ? null : menuTitle);
   };
 
   return (
@@ -237,45 +264,150 @@ const NavigationMenu = () => {
               <img 
                 src="https://cdn-ildgilf.nitrocdn.com/yPlgDgPaMVJZvmIRpddkPotnZbbEHqnY/assets/images/optimized/rev-503a6b3/www.truenorthitg.com/wp-content/uploads/2021/03/truenorth-logo-1.png" 
                 alt="TrueNorth ITG" 
-                className="h-12" 
+                className="h-8 md:h-12" 
               />
             </div>
           </Link>
           
-          <nav className="hidden md:flex space-x-8">
-            {mainMenuItems.map((item) => (
-              <div key={item.title} 
-                className="relative group"
-                onMouseEnter={() => item.megaMenu.length > 0 && handleMenuEnter(item.title)}
-              >
-                <Link 
-                  to={item.href} 
-                  className={`text-white py-2 flex items-center text-base font-medium space-x-1 border-b-2 ${
-                    activeMenu === item.title ? 'border-yellow-400' : 'border-transparent'
-                  } hover:border-yellow-400 transition-all duration-300`}
+          {/* Desktop Navigation */}
+          {!isMobile && (
+            <nav className="flex space-x-8">
+              {mainMenuItems.map((item) => (
+                <div key={item.title} 
+                  className="relative group"
+                  onMouseEnter={() => item.megaMenu.length > 0 && handleMenuEnter(item.title)}
                 >
-                  <span>{item.title}</span>
-                  {item.megaMenu.length > 0 && (
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                  )}
-                </Link>
-              </div>
-            ))}
-          </nav>
+                  <Link 
+                    to={item.href} 
+                    className={`text-white py-2 flex items-center text-base font-medium space-x-1 border-b-2 ${
+                      activeMenu === item.title ? 'border-yellow-400' : 'border-transparent'
+                    } hover:border-yellow-400 transition-all duration-300`}
+                  >
+                    <span>{item.title}</span>
+                    {item.megaMenu.length > 0 && (
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    )}
+                  </Link>
+                </div>
+              ))}
+            </nav>
+          )}
           
-          <div className="hidden md:flex items-center space-x-4">
-            <Button className="bg-transparent border-2 border-white hover:bg-white hover:text-blue-900 text-white rounded-full px-6">
-              Let's talk
-            </Button>
-            <Search className="h-6 w-6 text-white cursor-pointer" />
-          </div>
+          {/* Desktop Buttons */}
+          {!isMobile ? (
+            <div className="flex items-center space-x-4">
+              <Button className="bg-transparent border-2 border-white hover:bg-white hover:text-blue-900 text-white rounded-full px-6">
+                Let's talk
+              </Button>
+              <Search className="h-6 w-6 text-white cursor-pointer" />
+            </div>
+          ) : (
+            <div className="flex items-center space-x-4">
+              <Button 
+                onClick={toggleMobileMenu} 
+                variant="ghost" 
+                size="sm" 
+                className="text-white p-1"
+              >
+                {mobileMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </Button>
+            </div>
+          )}
         </div>
       </div>
       
-      {/* Mega Menus */}
-      {mainMenuItems.map((item) => (
+      {/* Mobile Menu */}
+      {isMobile && mobileMenuOpen && (
+        <div className="bg-blue-900 border-t border-blue-800">
+          <div className="container mx-auto px-4 py-4">
+            {mainMenuItems.map((item) => (
+              <div key={`mobile-${item.title}`} className="py-2">
+                {item.megaMenu.length > 0 ? (
+                  <>
+                    <div 
+                      className="flex justify-between items-center text-white py-2"
+                      onClick={() => toggleMobileSubmenu(item.title)}
+                    >
+                      <span className="font-medium">{item.title}</span>
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        width="16" 
+                        height="16" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="2" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round"
+                        className={`transition-transform ${activeMobileMenu === item.title ? 'rotate-180' : ''}`}
+                      >
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </div>
+                    
+                    {activeMobileMenu === item.title && (
+                      <div className="pl-4 py-2 space-y-4">
+                        {item.megaMenu.map((section, idx) => (
+                          <div key={`mobile-section-${idx}`} className="mb-4">
+                            <h4 className="text-yellow-400 font-medium mb-2">{section.title}</h4>
+                            <ul className="space-y-2">
+                              {section.links.map((link, linkIdx) => (
+                                <li key={`mobile-link-${linkIdx}`}>
+                                  <Link 
+                                    to={link.href}
+                                    className="text-white text-sm block py-1"
+                                    onClick={toggleMobileMenu}
+                                  >
+                                    {link.name}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link 
+                    to={item.href}
+                    className="text-white block py-2 font-medium"
+                    onClick={toggleMobileMenu}
+                  >
+                    {item.title}
+                  </Link>
+                )}
+              </div>
+            ))}
+            
+            {/* Mobile Call-to-Action Button */}
+            <div className="mt-4 pt-4 border-t border-blue-800">
+              <Button className="w-full bg-transparent border-2 border-white hover:bg-white hover:text-blue-900 text-white rounded-full px-6 py-2">
+                Let's talk
+              </Button>
+              <div className="mt-4 grid grid-cols-2 gap-2">
+                <div className="text-white text-sm">
+                  <div className="font-medium">Sales</div>
+                  <div>1.855.383.4300</div>
+                </div>
+                <div className="text-white text-sm">
+                  <div className="font-medium">Support</div>
+                  <div>1.800.372.1660</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Desktop Mega Menus */}
+      {!isMobile && mainMenuItems.map((item) => (
         item.megaMenu.length > 0 && (
           <div 
             key={`mega-${item.title}`}

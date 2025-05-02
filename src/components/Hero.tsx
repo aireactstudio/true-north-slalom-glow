@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface HeroProps {
   title: string;
@@ -21,8 +22,10 @@ const Hero: React.FC<HeroProps> = ({
   backgroundImage = "/lovable-uploads/fe11fbd3-8a3c-4b73-9c5d-807dce50204b.png",
   overlayOpacity = 0.7,
 }) => {
+  const isMobile = useIsMobile();
+
   return (
-    <div className="relative min-h-screen flex items-center">
+    <div className="relative min-h-[80vh] md:min-h-screen flex items-center">
       {/* Background image */}
       <div 
         className="absolute inset-0 bg-cover bg-center z-0" 
@@ -39,22 +42,22 @@ const Hero: React.FC<HeroProps> = ({
       <div className="container mx-auto px-4 z-20 pt-24">
         <div className="max-w-4xl">
           {subtitle && (
-            <p className="text-tnorth-accent text-lg mb-4 animate-fade-in font-medium tracking-wide">
+            <p className="text-tnorth-accent text-base md:text-lg mb-3 md:mb-4 animate-fade-in font-medium tracking-wide">
               {subtitle}
             </p>
           )}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl text-white font-bold mb-6 leading-tight animate-fade-in" style={{ animationDelay: '0.1s' }}>
+          <h1 className={`text-3xl md:text-5xl lg:text-6xl text-white font-bold mb-4 md:mb-6 leading-tight animate-fade-in`} style={{ animationDelay: '0.1s' }}>
             {title}
           </h1>
           {description && (
-            <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <p className="text-lg md:text-2xl text-white/90 mb-6 md:mb-8 max-w-3xl animate-fade-in" style={{ animationDelay: '0.2s' }}>
               {description}
             </p>
           )}
           {buttonText && (
             <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
               <Button 
-                className="bg-tnorth hover:bg-tnorth-light text-white px-8 py-6 text-lg h-auto"
+                className={`bg-tnorth hover:bg-tnorth-light text-white px-6 md:px-8 py-5 md:py-6 text-base md:text-lg h-auto`}
                 asChild
               >
                 <a href={buttonLink}>{buttonText}</a>
