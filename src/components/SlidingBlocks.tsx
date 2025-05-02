@@ -10,6 +10,7 @@ interface BlockData {
   initialPosition: { x: number; y: number };
   targetPosition: { x: number; y: number };
   expandedPosition?: { x: number; y: number };
+  shouldMove?: boolean; // Flag to determine if block should move during banner animation
 }
 
 interface BannerData {
@@ -18,9 +19,12 @@ interface BannerData {
   row: number;
   active: boolean;
   blockIds: number[]; // IDs of blocks to animate for this banner
+  width: number; // Width of the banner
 }
 
 const SlidingBlocks = () => {
+  const bannerWidth = 280; // Fixed width of the banners
+
   const [blocks, setBlocks] = useState<BlockData[]>([
     { 
       id: 1, 
@@ -29,7 +33,8 @@ const SlidingBlocks = () => {
       color: "bg-purple-300", 
       initialPosition: { x: -100, y: 0 }, 
       targetPosition: { x: 0, y: 0 },
-      expandedPosition: { x: 0, y: 0 }
+      expandedPosition: { x: 0, y: 0 },
+      shouldMove: false
     },
     { 
       id: 2, 
@@ -38,7 +43,8 @@ const SlidingBlocks = () => {
       color: "bg-pink-400", 
       initialPosition: { x: -100, y: 50 }, 
       targetPosition: { x: 80, y: 0 },
-      expandedPosition: { x: 80, y: 0 }
+      expandedPosition: { x: 80, y: 0 },
+      shouldMove: false
     },
     { 
       id: 3, 
@@ -47,7 +53,8 @@ const SlidingBlocks = () => {
       color: "bg-red-400", 
       initialPosition: { x: -100, y: 100 }, 
       targetPosition: { x: 160, y: 0 },
-      expandedPosition: { x: 160, y: 0 }
+      expandedPosition: { x: 160, y: 0 },
+      shouldMove: false
     },
     { 
       id: 4, 
@@ -56,7 +63,8 @@ const SlidingBlocks = () => {
       color: "bg-orange-400", 
       initialPosition: { x: 100, y: -100 }, 
       targetPosition: { x: 240, y: 0 },
-      expandedPosition: { x: 400, y: 0 } // Move further right when expanded
+      expandedPosition: { x: 240, y: 0 }, // Cloud block doesn't move
+      shouldMove: false
     },
     { 
       id: 5, 
@@ -65,7 +73,8 @@ const SlidingBlocks = () => {
       color: "bg-yellow-300", 
       initialPosition: { x: 200, y: -50 }, 
       targetPosition: { x: 160, y: 80 },
-      expandedPosition: { x: 160, y: 80 }
+      expandedPosition: { x: 160, y: 80 },
+      shouldMove: false
     },
     { 
       id: 6, 
@@ -74,7 +83,8 @@ const SlidingBlocks = () => {
       color: "bg-lime-200", 
       initialPosition: { x: 200, y: 0 }, 
       targetPosition: { x: 240, y: 80 },
-      expandedPosition: { x: 400, y: 80 } // Move further right when expanded
+      expandedPosition: { x: 240, y: 80 }, // Experience block doesn't move
+      shouldMove: false
     },
     { 
       id: 7, 
@@ -83,7 +93,8 @@ const SlidingBlocks = () => {
       color: "bg-lime-400", 
       initialPosition: { x: 100, y: 200 }, 
       targetPosition: { x: 320, y: 80 },
-      expandedPosition: { x: 480, y: 80 } // Move further right when expanded
+      expandedPosition: { x: 320 + bannerWidth, y: 80 }, // Move right by banner width
+      shouldMove: true
     },
     { 
       id: 8, 
@@ -92,7 +103,8 @@ const SlidingBlocks = () => {
       color: "bg-green-400", 
       initialPosition: { x: 200, y: 200 }, 
       targetPosition: { x: 400, y: 80 },
-      expandedPosition: { x: 560, y: 80 } // Move further right when expanded
+      expandedPosition: { x: 400 + bannerWidth, y: 80 }, // Move right by banner width
+      shouldMove: true
     },
     { 
       id: 9, 
@@ -101,7 +113,8 @@ const SlidingBlocks = () => {
       color: "bg-emerald-200", 
       initialPosition: { x: 300, y: 200 }, 
       targetPosition: { x: 80, y: 160 },
-      expandedPosition: { x: 80, y: 160 }
+      expandedPosition: { x: 80, y: 160 },
+      shouldMove: false
     },
     { 
       id: 10, 
@@ -110,7 +123,8 @@ const SlidingBlocks = () => {
       color: "bg-cyan-300", 
       initialPosition: { x: 300, y: 100 }, 
       targetPosition: { x: 160, y: 160 },
-      expandedPosition: { x: 320, y: 160 } // Move further right when expanded
+      expandedPosition: { x: 160, y: 160 }, // Operations block doesn't move
+      shouldMove: false
     },
     { 
       id: 11, 
@@ -119,7 +133,8 @@ const SlidingBlocks = () => {
       color: "bg-blue-300", 
       initialPosition: { x: 300, y: 0 }, 
       targetPosition: { x: 240, y: 160 },
-      expandedPosition: { x: 240, y: 160 }
+      expandedPosition: { x: 240, y: 160 },
+      shouldMove: false
     },
     { 
       id: 12, 
@@ -128,7 +143,8 @@ const SlidingBlocks = () => {
       color: "bg-indigo-400", 
       initialPosition: { x: 300, y: -50 }, 
       targetPosition: { x: 320, y: 160 },
-      expandedPosition: { x: 320, y: 160 }
+      expandedPosition: { x: 320, y: 160 },
+      shouldMove: false
     }
   ]);
 
@@ -138,21 +154,24 @@ const SlidingBlocks = () => {
       text: "Experience strategy & design",
       row: 1,
       active: false,
-      blockIds: [6, 7, 8] // Ex, Dp, Pd
+      blockIds: [7, 8], // Only Dp, Pd (Development and Product) should move
+      width: bannerWidth
     },
     {
       id: 2,
       text: "Operations",
       row: 2,
       active: false,
-      blockIds: [10] // Op
+      blockIds: [], // No blocks move for Operations
+      width: bannerWidth
     },
     {
       id: 3,
       text: "Cloud",
       row: 0,
       active: false,
-      blockIds: [4] // Cl
+      blockIds: [], // No blocks move for Cloud
+      width: bannerWidth
     }
   ]);
 
@@ -224,9 +243,9 @@ const SlidingBlocks = () => {
       b.id === bannerId ? { ...b, active: true } : b
     ));
     
-    // Move blocks for this banner
+    // Move blocks that should move for this banner
     setBlocks(prev => prev.map(block => {
-      if (banner.blockIds.includes(block.id)) {
+      if (banner.blockIds.includes(block.id) && block.shouldMove) {
         return { 
           ...block, 
           initialPosition: block.expandedPosition || block.targetPosition
@@ -242,7 +261,7 @@ const SlidingBlocks = () => {
       ));
       
       setBlocks(prev => prev.map(block => {
-        if (banner.blockIds.includes(block.id)) {
+        if (banner.blockIds.includes(block.id) && block.shouldMove) {
           return { ...block, initialPosition: block.targetPosition };
         }
         return block;
@@ -264,9 +283,10 @@ const SlidingBlocks = () => {
                 key={banner.id}
                 className={`absolute h-[75px] bg-tnorth-surface-blue text-white flex items-center px-6 transition-all duration-500 rounded-none ${banner.active ? 'opacity-100 z-20' : 'opacity-0 z-0'}`}
                 style={{
-                  transform: `translate(${banner.active ? '320px' : '0px'}, ${banner.row * 80}px)`,
-                  width: '280px',
-                  left: 0
+                  transform: `translateY(${banner.row * 80}px)`,
+                  width: `${banner.width}px`,
+                  left: banner.active ? '240px' : '520px', // Start off-screen to the right, slide in to position
+                  transition: 'left 0.5s ease-out, opacity 0.5s ease-out'
                 }}
               >
                 <span className="font-medium whitespace-nowrap">{banner.text}</span>
