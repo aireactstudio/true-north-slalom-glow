@@ -234,7 +234,11 @@ const NavigationMenu = () => {
         <div className="flex justify-between items-center py-4">
           <Link to="/" className="flex-shrink-0">
             <div className="text-white font-bold text-2xl">
-              <img src="/placeholder.svg" alt="TrueNorth" className="h-12" />
+              <img 
+                src="https://cdn-ildgilf.nitrocdn.com/yPlgDgPaMVJZvmIRpddkPotnZbbEHqnY/assets/images/optimized/rev-503a6b3/www.truenorthitg.com/wp-content/uploads/2021/03/truenorth-logo-1.png" 
+                alt="TrueNorth ITG" 
+                className="h-12" 
+              />
             </div>
           </Link>
           
