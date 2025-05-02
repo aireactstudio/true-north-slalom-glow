@@ -2,13 +2,13 @@
 import React from 'react';
 
 const Partners: React.FC = () => {
-  // Partner logos would go here (using placeholder images)
+  // Partner logos using the newly uploaded images
   const partners = [
-    { name: 'AWS', logo: '/lovable-uploads/19519767-7e4d-4e4f-ac55-b1bf82b0db44.png' },
-    { name: 'Microsoft', logo: '/lovable-uploads/63f80472-0c9c-450e-962a-b29e16c96fb1.png' },
-    { name: 'Google Cloud', logo: '/lovable-uploads/df6ca71a-07b2-493c-9f17-b8e935a84b70.png' },
-    { name: 'Cisco', logo: '/lovable-uploads/94ddb473-c6e9-4b17-8148-019e545e1860.png' },
-    { name: 'Epic', logo: '/lovable-uploads/5eed2065-379d-48f8-84dc-1c138fb424c6.png' },
+    { name: 'Cisco', logo: '/lovable-uploads/c152e9b9-2214-4f6a-9f7e-60a88a816960.png' },
+    { name: 'Citrix', logo: '/lovable-uploads/1ac79533-fdd0-4f3a-9ef9-4e877ee628e9.png' },
+    { name: 'Microsoft Gold Partner', logo: '/lovable-uploads/8c7a533f-d54f-4492-870e-4423ef65c305.png' },
+    { name: 'Modernizing Medicine', logo: '/lovable-uploads/a7db0800-19d0-4073-9922-490670e1bbe0.png' },
+    { name: 'VMware', logo: '/lovable-uploads/f77348d2-90ab-4085-a227-417876a3e0db.png' },
   ];
 
   return (
