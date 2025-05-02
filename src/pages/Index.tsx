@@ -20,7 +20,7 @@ const Index = () => {
         description="We deliver secure, scalable, and reliable IT solutions that help organizations navigate their digital transformation journey with confidence."
         buttonText="Discover Our Services"
         buttonLink="/services"
-        backgroundImage="/lovable-uploads/5eed2065-379d-48f8-84dc-1c138fb424c6.png"
+        backgroundImage="/lovable-uploads/fe11fbd3-8a3c-4b73-9c5d-807dce50204b.png"
       />
       
       <ServicesOverview />
