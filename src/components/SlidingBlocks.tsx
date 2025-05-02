@@ -17,6 +17,7 @@ interface BannerData {
   text: string;
   row: number;
   active: boolean;
+  blockIds: number[]; // IDs of blocks to animate for this banner
 }
 
 const SlidingBlocks = () => {
@@ -55,7 +56,7 @@ const SlidingBlocks = () => {
       color: "bg-orange-400", 
       initialPosition: { x: 100, y: -100 }, 
       targetPosition: { x: 240, y: 0 },
-      expandedPosition: { x: 240, y: 0 }
+      expandedPosition: { x: 400, y: 0 } // Move further right when expanded
     },
     { 
       id: 5, 
@@ -73,7 +74,7 @@ const SlidingBlocks = () => {
       color: "bg-lime-200", 
       initialPosition: { x: 200, y: 0 }, 
       targetPosition: { x: 240, y: 80 },
-      expandedPosition: { x: 345, y: 80 }
+      expandedPosition: { x: 400, y: 80 } // Move further right when expanded
     },
     { 
       id: 7, 
@@ -82,7 +83,7 @@ const SlidingBlocks = () => {
       color: "bg-lime-400", 
       initialPosition: { x: 100, y: 200 }, 
       targetPosition: { x: 320, y: 80 },
-      expandedPosition: { x: 530, y: 80 }
+      expandedPosition: { x: 480, y: 80 } // Move further right when expanded
     },
     { 
       id: 8, 
@@ -91,7 +92,7 @@ const SlidingBlocks = () => {
       color: "bg-green-400", 
       initialPosition: { x: 200, y: 200 }, 
       targetPosition: { x: 400, y: 80 },
-      expandedPosition: { x: 610, y: 80 }
+      expandedPosition: { x: 560, y: 80 } // Move further right when expanded
     },
     { 
       id: 9, 
@@ -109,7 +110,7 @@ const SlidingBlocks = () => {
       color: "bg-cyan-300", 
       initialPosition: { x: 300, y: 100 }, 
       targetPosition: { x: 160, y: 160 },
-      expandedPosition: { x: 300, y: 160 }
+      expandedPosition: { x: 320, y: 160 } // Move further right when expanded
     },
     { 
       id: 11, 
@@ -136,19 +137,22 @@ const SlidingBlocks = () => {
       id: 1,
       text: "Experience strategy & design",
       row: 1,
-      active: false
+      active: false,
+      blockIds: [6, 7, 8] // Ex, Dp, Pd
     },
     {
       id: 2,
       text: "Operations",
       row: 2,
-      active: false
+      active: false,
+      blockIds: [10] // Op
     },
     {
       id: 3,
       text: "Cloud",
       row: 0,
-      active: false
+      active: false,
+      blockIds: [4] // Cl
     }
   ]);
 
@@ -194,19 +198,38 @@ const SlidingBlocks = () => {
     const returnDelay = 1000;  // Delay before blocks return to original position
 
     // Show first banner (Cloud)
-    setBanners(prev => prev.map(banner => 
-      banner.id === 3 ? { ...banner, active: true } : banner
+    showBanner(3, showDuration, returnDelay, () => {
+      
+      // Show second banner (Operations)
+      showBanner(2, showDuration, returnDelay, () => {
+        
+        // Show third banner (Experience)
+        showBanner(1, showDuration, returnDelay, () => {
+          
+          // Restart the sequence after a longer pause
+          setTimeout(() => startBannerSequence(), 3000);
+        });
+      });
+    });
+  };
+
+  // Function to show a specific banner, move blocks, then hide and callback
+  const showBanner = (bannerId: number, duration: number, returnDelay: number, callback: () => void) => {
+    // Get the banner
+    const banner = banners.find(b => b.id === bannerId);
+    if (!banner) return;
+    
+    // Activate banner
+    setBanners(prev => prev.map(b => 
+      b.id === bannerId ? { ...b, active: true } : b
     ));
     
-    // Move blocks for first banner
+    // Move blocks for this banner
     setBlocks(prev => prev.map(block => {
-      if (block.id === 4) { // Cloud block
+      if (banner.blockIds.includes(block.id)) {
         return { 
           ...block, 
-          initialPosition: { 
-            x: block.targetPosition.x + 100, 
-            y: block.targetPosition.y
-          } 
+          initialPosition: block.expandedPosition || block.targetPosition
         };
       }
       return block;
@@ -214,102 +237,49 @@ const SlidingBlocks = () => {
     
     // Return blocks and hide banner after delay
     setTimeout(() => {
-      setBanners(prev => prev.map(banner => 
-        banner.id === 3 ? { ...banner, active: false } : banner
+      setBanners(prev => prev.map(b => 
+        b.id === bannerId ? { ...b, active: false } : b
       ));
       
       setBlocks(prev => prev.map(block => {
-        if (block.id === 4) { // Cloud block
+        if (banner.blockIds.includes(block.id)) {
           return { ...block, initialPosition: block.targetPosition };
         }
         return block;
       }));
       
-      // Show second banner (Operations) after delay
-      setTimeout(() => {
-        setBanners(prev => prev.map(banner => 
-          banner.id === 2 ? { ...banner, active: true } : banner
-        ));
-        
-        // Move blocks for second banner
-        setBlocks(prev => prev.map(block => {
-          if (block.id === 10) { // Operations block
-            return { 
-              ...block, 
-              initialPosition: { 
-                x: block.targetPosition.x + 140, 
-                y: block.targetPosition.y
-              } 
-            };
-          }
-          return block;
-        }));
-        
-        // Return blocks and hide banner after delay
-        setTimeout(() => {
-          setBanners(prev => prev.map(banner => 
-            banner.id === 2 ? { ...banner, active: false } : banner
-          ));
-          
-          setBlocks(prev => prev.map(block => {
-            if (block.id === 10) { // Operations block
-              return { ...block, initialPosition: block.targetPosition };
-            }
-            return block;
-          }));
-          
-          // Show third banner (Experience) after delay
-          setTimeout(() => {
-            setBanners(prev => prev.map(banner => 
-              banner.id === 1 ? { ...banner, active: true } : banner
-            ));
-            
-            // Move blocks for third banner (Ex, Dp, Pd spread out)
-            setBlocks(prev => prev.map(block => {
-              if ([6, 7, 8].includes(block.id)) { // Ex, Dp, Pd blocks
-                return { 
-                  ...block, 
-                  initialPosition: block.expandedPosition || block.targetPosition 
-                };
-              }
-              return block;
-            }));
-            
-            // Return blocks and hide banner after delay
-            setTimeout(() => {
-              setBanners(prev => prev.map(banner => 
-                banner.id === 1 ? { ...banner, active: false } : banner
-              ));
-              
-              setBlocks(prev => prev.map(block => {
-                if ([6, 7, 8].includes(block.id)) {
-                  return { ...block, initialPosition: block.targetPosition };
-                }
-                return block;
-              }));
-              
-              // Restart the sequence after a longer pause
-              setTimeout(() => startBannerSequence(), 3000);
-              
-            }, showDuration);
-          }, returnDelay);
-        }, showDuration);
-      }, returnDelay);
-    }, showDuration);
+      // Call the callback after the return animation
+      setTimeout(() => callback(), returnDelay);
+    }, duration);
   };
 
   return (
     <section className="py-16 bg-tnorth-surface-dark text-white">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="relative h-[320px]">
+          <div className="relative h-[320px] overflow-visible">
+            {/* Banners that appear when blocks slide */}
+            {banners.map((banner) => (
+              <div
+                key={banner.id}
+                className={`absolute h-[75px] bg-tnorth-surface-blue text-white flex items-center px-6 transition-all duration-500 rounded-none ${banner.active ? 'opacity-100 z-20' : 'opacity-0 z-0'}`}
+                style={{
+                  transform: `translate(${banner.active ? '320px' : '0px'}, ${banner.row * 80}px)`,
+                  width: '280px',
+                  left: 0
+                }}
+              >
+                <span className="font-medium whitespace-nowrap">{banner.text}</span>
+              </div>
+            ))}
+            
             {blocks.map((block) => (
               <div
                 key={block.id}
                 className={`absolute w-[75px] h-[75px] ${block.color} text-black font-bold flex flex-col justify-center items-center rounded-none shadow-lg transition-all duration-500 ease-out`}
                 style={{
                   transform: `translate(${block.initialPosition.x}px, ${block.initialPosition.y}px)`,
-                  opacity: block.initialPosition.x === block.targetPosition.x ? 1 : 0.8,
+                  opacity: 1,
                   zIndex: 10
                 }}
               >
@@ -317,22 +287,6 @@ const SlidingBlocks = () => {
                 {animationComplete && (
                   <span className="text-[8px] text-center px-1 opacity-70">{block.fullText}</span>
                 )}
-              </div>
-            ))}
-            
-            {/* Banners that appear when blocks slide */}
-            {banners.map((banner) => (
-              <div
-                key={banner.id}
-                className={`absolute h-[75px] bg-tnorth-surface-blue text-white flex items-center px-6 transition-all duration-500 rounded-none ${banner.active ? 'opacity-100' : 'opacity-0'}`}
-                style={{
-                  transform: `translate(${banner.active ? '320px' : '0px'}, ${banner.row * 80}px)`,
-                  width: '220px',
-                  left: 0,
-                  zIndex: 5
-                }}
-              >
-                <span className="font-medium whitespace-nowrap">{banner.text}</span>
               </div>
             ))}
           </div>
