@@ -2,13 +2,13 @@
 import React from 'react';
 
 const Partners: React.FC = () => {
-  // Partner logos using the newly uploaded images
+  // Partner logos using placeholder images
   const partners = [
-    { name: 'Cisco', logo: '/lovable-uploads/c152e9b9-2214-4f6a-9f7e-60a88a816960.png' },
-    { name: 'Citrix', logo: '/lovable-uploads/1ac79533-fdd0-4f3a-9ef9-4e877ee628e9.png' },
-    { name: 'Microsoft Gold Partner', logo: '/lovable-uploads/8c7a533f-d54f-4492-870e-4423ef65c305.png' },
-    { name: 'Modernizing Medicine', logo: '/lovable-uploads/a7db0800-19d0-4073-9922-490670e1bbe0.png' },
-    { name: 'VMware', logo: '/lovable-uploads/f77348d2-90ab-4085-a227-417876a3e0db.png' },
+    { name: 'Cisco', logo: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=400&h=250' },
+    { name: 'Citrix', logo: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&h=250' },
+    { name: 'Microsoft Gold Partner', logo: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&h=250' },
+    { name: 'Modernizing Medicine', logo: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=400&h=250' },
+    { name: 'VMware', logo: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&h=250' },
   ];
 
   return (
