@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 
@@ -95,7 +94,7 @@ const SlidingBlocks = () => {
       color: "bg-lime-400", 
       initialPosition: { x: 100, y: 200 }, 
       targetPosition: { x: 320, y: 80 },
-      expandedPosition: { x: 320 + bannerWidth, y: 80 }, // Move right by banner width
+      expandedPosition: { x: 320 + defaultBannerWidth, y: 80 }, // Fixed: Changed bannerWidth to defaultBannerWidth
       shouldMove: true
     },
     { 
@@ -105,7 +104,7 @@ const SlidingBlocks = () => {
       color: "bg-green-400", 
       initialPosition: { x: 200, y: 200 }, 
       targetPosition: { x: 400, y: 80 },
-      expandedPosition: { x: 400 + bannerWidth, y: 80 }, // Move right by banner width
+      expandedPosition: { x: 400 + defaultBannerWidth, y: 80 }, // Fixed: Changed bannerWidth to defaultBannerWidth
       shouldMove: true
     },
     { 
