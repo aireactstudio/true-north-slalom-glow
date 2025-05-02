@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 
@@ -22,7 +23,9 @@ interface BannerData {
 }
 
 const SlidingBlocks = () => {
-  const bannerWidth = 280; // Fixed width of the banners
+  // Adjusted banner widths based on content
+  const defaultBannerWidth = 280;
+  const cloudBannerWidth = 120; // Reduced width for the cloud banner
 
   const [blocks, setBlocks] = useState<BlockData[]>([
     { 
@@ -154,7 +157,7 @@ const SlidingBlocks = () => {
       row: 1,
       active: false,
       blockIds: [7, 8], // Only Dp, Pd (Development and Product) should move
-      width: bannerWidth
+      width: defaultBannerWidth
     },
     {
       id: 2,
@@ -162,7 +165,7 @@ const SlidingBlocks = () => {
       row: 2,
       active: false,
       blockIds: [], // No blocks move for Operations
-      width: bannerWidth
+      width: defaultBannerWidth
     },
     {
       id: 3,
@@ -170,7 +173,7 @@ const SlidingBlocks = () => {
       row: 0,
       active: false,
       blockIds: [], // No blocks move for Cloud
-      width: bannerWidth
+      width: cloudBannerWidth // Using the smaller width for Cloud
     }
   ]);
 
@@ -211,23 +214,28 @@ const SlidingBlocks = () => {
 
   // Function to handle the banner animation sequence
   const startBannerSequence = () => {
-    // Animation sequence timing
-    const showDuration = 2000; // How long each banner shows
-    const returnDelay = 1000;  // Delay before blocks return to original position
+    // Increased timing values for slower animations
+    const showDuration = 3000;      // How long each banner shows (increased from 2000)
+    const transitionDelay = 1500;   // Delay between banner animations (increased from 1000)
+    const sequenceDelay = 4500;     // Delay before restarting sequence (increased from 3000)
 
     // Show first banner (Cloud)
-    showBanner(3, showDuration, returnDelay, () => {
+    showBanner(3, showDuration, transitionDelay, () => {
       
-      // Show second banner (Operations)
-      showBanner(2, showDuration, returnDelay, () => {
-        
-        // Show third banner (Experience)
-        showBanner(1, showDuration, returnDelay, () => {
+      // Show second banner (Operations) after proper delay
+      setTimeout(() => {
+        showBanner(2, showDuration, transitionDelay, () => {
           
-          // Restart the sequence after a longer pause
-          setTimeout(() => startBannerSequence(), 3000);
+          // Show third banner (Experience) after proper delay
+          setTimeout(() => {
+            showBanner(1, showDuration, transitionDelay, () => {
+              
+              // Restart the sequence after a longer pause
+              setTimeout(() => startBannerSequence(), sequenceDelay);
+            });
+          }, transitionDelay);
         });
-      });
+      }, transitionDelay);
     });
   };
 
@@ -245,9 +253,14 @@ const SlidingBlocks = () => {
     // Move blocks that should move for this banner
     setBlocks(prev => prev.map(block => {
       if (banner.blockIds.includes(block.id) && block.shouldMove) {
+        // Calculate proper expanded position based on banner width
+        const expandedX = block.targetPosition.x + banner.width;
         return { 
           ...block, 
-          initialPosition: block.expandedPosition || block.targetPosition
+          initialPosition: { 
+            x: expandedX, 
+            y: block.targetPosition.y 
+          }
         };
       }
       return block;
@@ -266,7 +279,7 @@ const SlidingBlocks = () => {
         return block;
       }));
       
-      // Call the callback after the return animation
+      // Call the callback after the return animation completes
       setTimeout(() => callback(), returnDelay);
     }, duration);
   };
@@ -280,12 +293,12 @@ const SlidingBlocks = () => {
             {banners.map((banner) => (
               <div
                 key={banner.id}
-                className={`absolute h-[75px] bg-tnorth-surface-blue text-white flex items-center px-6 transition-all duration-500 rounded-none ${banner.active ? 'opacity-100 z-20' : 'opacity-0 z-0'}`}
+                className={`absolute h-[75px] bg-tnorth-surface-blue text-white flex items-center px-6 transition-all duration-700 rounded-none ${banner.active ? 'opacity-100 z-20' : 'opacity-0 z-0'}`}
                 style={{
                   transform: `translateY(${banner.row * 80}px)`,
                   width: `${banner.width}px`,
                   left: banner.active ? '240px' : '0px', // Changed: starts from left (0px) and slides to position (240px)
-                  transition: 'left 0.5s ease-out, opacity 0.5s ease-out'
+                  transition: 'left 0.7s ease-out, opacity 0.7s ease-out' // Slowed down transitions
                 }}
               >
                 <span className="font-medium whitespace-nowrap">{banner.text}</span>
