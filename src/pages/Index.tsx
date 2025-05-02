@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ServicesOverview from '@/components/ServicesOverview';
+import SlidingBlocks from '@/components/SlidingBlocks';
 import FeaturedContent from '@/components/FeaturedContent';
 import Testimonials from '@/components/Testimonials';
 import CTA from '@/components/CTA';
@@ -24,6 +25,8 @@ const Index = () => {
       />
       
       <ServicesOverview />
+      
+      <SlidingBlocks />
       
       <section className="py-20 bg-tnorth-surface-dark text-white">
         <div className="container mx-auto px-4">
