@@ -20,6 +20,7 @@ const Index = () => {
         description="We deliver secure, scalable, and reliable IT solutions that help organizations navigate their digital transformation journey with confidence."
         buttonText="Discover Our Services"
         buttonLink="/services"
+        backgroundImage="/lovable-uploads/5eed2065-379d-48f8-84dc-1c138fb424c6.png"
       />
       
       <ServicesOverview />
@@ -28,37 +29,41 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Healthcare IT Expertise</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Healthcare IT Solutions</h2>
               <p className="text-xl mb-8">
-                We specialize in delivering secure, compliant IT solutions for 
-                healthcare organizations of all sizes. From EHR implementation to 
-                cloud migrations and security assessments, we understand the unique 
-                challenges of healthcare IT.
+                Some of the most important IT solutions for healthcare providers to consider include Electronic Health Records (EHRs), 
+                telemedicine, clinical decision support systems (CDSS), Internet of Medical Things (IoMT), and Artificial Intelligence (AI).
               </p>
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <svg className="h-6 w-6 text-tnorth-accent mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>HIPAA-compliant cloud hosting solutions</span>
+                  <span>EHRs enable you to store, manage, and exchange patient information digitally, ensuring timely access to accurate medical records.</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="h-6 w-6 text-tnorth-accent mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>EHR implementation and optimization</span>
+                  <span>Telemedicine allows healthcare professionals to remotely evaluate, diagnose, and treat patients, enhancing access to services.</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="h-6 w-6 text-tnorth-accent mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Healthcare security and penetration testing</span>
+                  <span>CDSS provide evidence-based clinical guidelines and data analysis tools that assist in making informed decisions.</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="h-6 w-6 text-tnorth-accent mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Interoperability and healthcare data integration</span>
+                  <span>IoMT devices, such as wearables and remote monitoring systems, help you continuously monitor patients and collect data.</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-6 w-6 text-tnorth-accent mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>AI uses predictive analytics, medical imaging analysis, and natural language processing to help identify patterns.</span>
                 </li>
               </ul>
             </div>

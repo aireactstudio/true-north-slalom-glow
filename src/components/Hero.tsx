@@ -18,7 +18,7 @@ const Hero: React.FC<HeroProps> = ({
   description,
   buttonText = "Learn More",
   buttonLink = "#",
-  backgroundImage = "/lovable-uploads/83799a03-6689-45d2-8b21-9a11eda0a861.png",
+  backgroundImage = "/lovable-uploads/5eed2065-379d-48f8-84dc-1c138fb424c6.png",
   overlayOpacity = 0.7,
 }) => {
   return (
