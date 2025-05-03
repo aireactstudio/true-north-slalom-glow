@@ -18,9 +18,9 @@ const Index = () => {
       <Navbar transparent />
       
       <Hero 
-        title="Innovative IT Solutions for the Modern Enterprise"
+        title="Managed IT & Cloud Services for Healthcare"
         subtitle="TRUE NORTH ITG"
-        description="We deliver secure, scalable, and reliable IT solutions that help organizations navigate their digital transformation journey with confidence."
+        description="We manage IT, cloud and security so you can focus on your patients"
         buttonText="Discover Our Services"
         buttonLink="/services"
         backgroundImage="/lovable-uploads/fe11fbd3-8a3c-4b73-9c5d-807dce50204b.png"

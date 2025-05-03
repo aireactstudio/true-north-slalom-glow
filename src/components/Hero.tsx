@@ -14,9 +14,9 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({
-  title,
+  title = "Managed IT & Cloud Services\nfor Healthcare",
   subtitle,
-  description,
+  description = "We manage IT, cloud and security so you can focus on your patients",
   buttonText = "Learn More",
   buttonLink = "#",
   backgroundImage = "/lovable-uploads/fe11fbd3-8a3c-4b73-9c5d-807dce50204b.png",
@@ -46,7 +46,12 @@ const Hero: React.FC<HeroProps> = ({
             </p>
           )}
           <h1 className={`text-3xl md:text-5xl lg:text-6xl text-white font-bold mb-4 md:mb-6 leading-tight animate-fade-in drop-shadow-md`} style={{ animationDelay: '0.1s' }}>
-            {title}
+            {title.split('\n').map((line, i) => (
+              <React.Fragment key={i}>
+                {line}
+                {i < title.split('\n').length - 1 && <br />}
+              </React.Fragment>
+            ))}
           </h1>
           {description && (
             <p className="text-lg md:text-2xl text-white/90 mb-6 md:mb-8 max-w-3xl animate-fade-in drop-shadow-sm" style={{ animationDelay: '0.2s' }}>
