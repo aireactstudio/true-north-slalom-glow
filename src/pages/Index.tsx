@@ -3,11 +3,13 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ServicesOverview from '@/components/ServicesOverview';
+import StatsSection from '@/components/StatsSection';
 import SlidingBlocks from '@/components/SlidingBlocks';
 import FeaturedContent from '@/components/FeaturedContent';
 import Testimonials from '@/components/Testimonials';
 import CTA from '@/components/CTA';
 import Partners from '@/components/Partners';
+import ContactForm from '@/components/ContactForm';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -25,6 +27,8 @@ const Index = () => {
       />
       
       <ServicesOverview />
+      
+      <StatsSection />
       
       <SlidingBlocks />
       
@@ -90,6 +94,8 @@ const Index = () => {
       <Testimonials />
       
       <Partners />
+      
+      <ContactForm />
       
       <CTA 
         title="Ready to Transform Your IT Infrastructure?"

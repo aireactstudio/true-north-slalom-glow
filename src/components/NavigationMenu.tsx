@@ -1,71 +1,11 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-const TopNavigation = () => {
-  const isMobile = useIsMobile();
-  
-  return (
-    <div className="bg-blue-950 text-white py-2 px-4 flex justify-between items-center">
-      <div className="flex space-x-4">
-        <Link to="#" className="text-white hover:text-blue-200">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline-block">
-            <path d="M22 4s-2.7 8.2-9.3 11.7c-6.5 3.5-12.7-.2-12.7-.2s2.7-8.2 9.3-11.7C16 .3 22 4 22 4z"/>
-            <path d="M15 7l.01.01"/>
-          </svg>
-        </Link>
-        <Link to="#" className="text-white hover:text-blue-200">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline-block">
-            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-          </svg>
-        </Link>
-        <Link to="#" className="text-white hover:text-blue-200">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline-block">
-            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
-            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
-          </svg>
-        </Link>
-      </div>
-      {!isMobile ? (
-        <div className="flex items-center space-x-6">
-          <div className="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-            </svg>
-            <span className="text-sm">Sales: 1.855.383.4300</span>
-          </div>
-          <div className="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-            </svg>
-            <span className="text-sm">24/7 Customer Support: 1.800.372.1660</span>
-          </div>
-          <Button size="sm" className="bg-cyan-500 hover:bg-cyan-600 text-white text-xs rounded px-3 py-1">
-            See Service Pricing
-          </Button>
-          <Button variant="ghost" size="sm" className="text-white text-xs">
-            Client Login
-          </Button>
-          <Button variant="ghost" size="sm" className="text-white p-1">
-            <Search className="h-4 w-4" />
-          </Button>
-        </div>
-      ) : (
-        <div>
-          <Button variant="ghost" size="sm" className="text-white p-1">
-            <Search className="h-4 w-4" />
-          </Button>
-        </div>
-      )}
-    </div>
-  );
-};
-
 // Main Navigation Menu data structure
-const mainMenuItems = [
+export const mainMenuItems = [
   {
     title: "Healthcare IT",
     href: "/healthcare-it",
@@ -87,7 +27,7 @@ const mainMenuItems = [
           { name: "Azure Healthcare Services", href: "/healthcare-it/azure" },
           { name: "Private Cloud Hosting", href: "/healthcare-it/private-cloud" },
           { name: "Hybrid Cloud Hosting", href: "/healthcare-it/hybrid-cloud" },
-          { name: "Hosted Cloud Services", href: "/healthcare-it/hosted-cloud" },
+          { name: "Hosted Cloud Services", href: "/healthcare-it/hosted-services" },
         ]
       },
       {
@@ -202,22 +142,11 @@ const mainMenuItems = [
   {
     title: "Resources",
     href: "/resources",
-    megaMenu: [
-      {
-        title: "Resources",
-        links: [
-          { name: "Blogs", href: "/resources/blogs" },
-          { name: "Checklists", href: "/resources/checklists" },
-          { name: "Guides & eBooks", href: "/resources/guides" },
-          { name: "Case Studies", href: "/resources/case-studies" },
-          { name: "Assessments & Reports", href: "/resources/assessments" },
-        ]
-      }
-    ]
+    megaMenu: []
   },
   {
     title: "Contact Us",
-    href: "/contact-us",
+    href: "/contact",
     megaMenu: []
   }
 ];
@@ -232,16 +161,38 @@ const NavigationMenu = () => {
     setActiveMenu(activeMenu === menuTitle ? null : menuTitle);
   };
 
+  // Store timeout ID to be able to clear it
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+  
   const handleMenuEnter = (menuTitle: string) => {
     if (!isMobile) {
+      // Clear any existing timeout to prevent race conditions
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+      // Immediately set the active menu to the current one
       setActiveMenu(menuTitle);
     }
   };
 
   const handleMenuLeave = () => {
     if (!isMobile) {
-      setActiveMenu(null);
+      // Set a shorter timeout to close the menu quickly when moving between items
+      timeoutRef.current = setTimeout(() => {
+        setActiveMenu(null);
+        timeoutRef.current = null;
+      }, 10);
     }
+  };
+  
+  // Cancel menu closing when entering the mega menu
+  const handleMegaMenuEnter = (menuTitle: string) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setActiveMenu(menuTitle);
   };
 
   const toggleMobileMenu = () => {
@@ -253,186 +204,65 @@ const NavigationMenu = () => {
     setActiveMobileMenu(activeMobileMenu === menuTitle ? null : menuTitle);
   };
 
+  // Only return the desktop navigation menu items
+  // The mobile menu toggle is handled in the Navbar component
   return (
-    <div className="w-full bg-blue-900" onMouseLeave={handleMenuLeave}>
-      <TopNavigation />
-      
-      <div className="container mx-auto px-4 relative">
-        <div className="flex justify-between items-center py-4">
-          <Link to="/" className="flex-shrink-0">
-            <div className="text-white font-bold text-2xl">
-              <img 
-                src="https://cdn-ildgilf.nitrocdn.com/yPlgDgPaMVJZvmIRpddkPotnZbbEHqnY/assets/images/optimized/rev-503a6b3/www.truenorthitg.com/wp-content/uploads/2021/03/truenorth-logo-1.png" 
-                alt="TrueNorth ITG" 
-                className="h-8 md:h-12" 
-              />
-            </div>
-          </Link>
-          
-          {/* Desktop Navigation */}
-          {!isMobile && (
-            <nav className="flex space-x-8">
-              {mainMenuItems.map((item) => (
-                <div key={item.title} 
-                  className="relative group"
-                  onMouseEnter={() => item.megaMenu.length > 0 && handleMenuEnter(item.title)}
-                >
-                  <Link 
-                    to={item.href} 
-                    className={`text-white py-2 flex items-center text-base font-medium space-x-1 border-b-2 ${
-                      activeMenu === item.title ? 'border-yellow-400' : 'border-transparent'
-                    } hover:border-yellow-400 transition-all duration-300`}
-                  >
-                    <span>{item.title}</span>
-                    {item.megaMenu.length > 0 && (
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                      </svg>
-                    )}
-                  </Link>
-                </div>
-              ))}
-            </nav>
-          )}
-          
-          {/* Desktop Buttons */}
-          {!isMobile ? (
-            <div className="flex items-center space-x-4">
-              <Button className="bg-transparent border-2 border-white hover:bg-white hover:text-blue-900 text-white rounded-full px-6">
-                Let's talk
-              </Button>
-              <Search className="h-6 w-6 text-white cursor-pointer" />
-            </div>
-          ) : (
-            <div className="flex items-center space-x-4">
-              <Button 
-                onClick={toggleMobileMenu} 
-                variant="ghost" 
-                size="sm" 
-                className="text-white p-1"
-              >
-                {mobileMenuOpen ? (
-                  <X className="h-6 w-6" />
-                ) : (
-                  <Menu className="h-6 w-6" />
-                )}
-              </Button>
-            </div>
-          )}
-        </div>
-      </div>
-      
-      {/* Mobile Menu */}
-      {isMobile && mobileMenuOpen && (
-        <div className="bg-blue-900 border-t border-blue-800">
-          <div className="container mx-auto px-4 py-4">
-            {mainMenuItems.map((item) => (
-              <div key={`mobile-${item.title}`} className="py-2">
-                {item.megaMenu.length > 0 ? (
-                  <>
-                    <div 
-                      className="flex justify-between items-center text-white py-2"
-                      onClick={() => toggleMobileSubmenu(item.title)}
-                    >
-                      <span className="font-medium">{item.title}</span>
-                      <svg 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        strokeWidth="2" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
-                        className={`transition-transform ${activeMobileMenu === item.title ? 'rotate-180' : ''}`}
-                      >
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                      </svg>
-                    </div>
-                    
-                    {activeMobileMenu === item.title && (
-                      <div className="pl-4 py-2 space-y-4">
-                        {item.megaMenu.map((section, idx) => (
-                          <div key={`mobile-section-${idx}`} className="mb-4">
-                            <h4 className="text-yellow-400 font-medium mb-2">{section.title}</h4>
-                            <ul className="space-y-2">
-                              {section.links.map((link, linkIdx) => (
-                                <li key={`mobile-link-${linkIdx}`}>
-                                  <Link 
-                                    to={link.href}
-                                    className="text-white text-sm block py-1"
-                                    onClick={toggleMobileMenu}
-                                  >
-                                    {link.name}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <Link 
-                    to={item.href}
-                    className="text-white block py-2 font-medium"
-                    onClick={toggleMobileMenu}
-                  >
-                    {item.title}
-                  </Link>
-                )}
-              </div>
-            ))}
-            
-            {/* Mobile Call-to-Action Button */}
-            <div className="mt-4 pt-4 border-t border-blue-800">
-              <Button className="w-full bg-transparent border-2 border-white hover:bg-white hover:text-blue-900 text-white rounded-full px-6 py-2">
-                Let's talk
-              </Button>
-              <div className="mt-4 grid grid-cols-2 gap-2">
-                <div className="text-white text-sm">
-                  <div className="font-medium">Sales</div>
-                  <div>1.855.383.4300</div>
-                </div>
-                <div className="text-white text-sm">
-                  <div className="font-medium">Support</div>
-                  <div>1.800.372.1660</div>
-                </div>
-              </div>
-            </div>
+    <>
+      {/* Desktop Navigation */}
+      <nav className="flex space-x-8 relative">
+        {mainMenuItems.map((item) => (
+          <div key={item.title} 
+            className="relative group"
+            onMouseEnter={() => item.megaMenu.length > 0 && handleMenuEnter(item.title)}
+            onMouseLeave={handleMenuLeave}
+          >
+            <Link 
+              to={item.href} 
+              className={`text-white py-2 flex items-center text-base font-medium space-x-1 drop-shadow-md ${
+                activeMenu === item.title ? 'border-b-2 border-white' : ''
+              } hover:border-b-2 hover:border-white transition-all duration-200`}
+            >
+              <span>{item.title}</span>
+              {item.megaMenu.length > 0 && (
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              )}
+            </Link>
           </div>
-        </div>
-      )}
+        ))}
+      </nav>
       
       {/* Desktop Mega Menus */}
-      {!isMobile && mainMenuItems.map((item) => (
+      {mainMenuItems.map((item) => (
         item.megaMenu.length > 0 && (
           <div 
             key={`mega-${item.title}`}
-            className={`bg-blue-900 absolute w-full left-0 z-50 overflow-hidden transition-all duration-500 ${
+            className={`bg-tnorth-dark/80 backdrop-blur-sm absolute w-full left-0 top-full z-50 overflow-hidden transition-all duration-300 ease-in-out ${
               activeMenu === item.title 
-                ? 'opacity-100 max-h-[800px]' 
-                : 'opacity-0 max-h-0 pointer-events-none'
+                ? 'opacity-100 max-h-[800px] visible' 
+                : 'opacity-0 max-h-0 invisible'
             }`}
+            onMouseEnter={() => handleMegaMenuEnter(item.title)}
+            onMouseLeave={handleMenuLeave}
           >
-            <div className="container mx-auto py-12 px-4">
+            <div className="container mx-auto py-12 px-4 md:px-6 max-w-7xl">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                 {item.megaMenu.map((section, idx) => (
                   <div key={`section-${idx}`} className="space-y-6">
-                    <h3 className="text-yellow-400 text-xl font-medium">
+                    <h3 className="text-white text-xl font-medium drop-shadow-md">
                       {section.title}
                     </h3>
                     <ul className="space-y-3">
                       {section.links.map((link, linkIdx) => (
                         <li key={`link-${linkIdx}`}>
                           <Link 
-                            to={link.href}
-                            className="text-white hover:text-yellow-200 transition-colors"
+                            to={link.href} 
+                            className="text-white/90 hover:text-white flex items-center space-x-1 group drop-shadow-sm"
                             onClick={() => setActiveMenu(null)}
                           >
-                            {link.name}
+                            <span className="text-white/70 group-hover:text-tnorth-accent">›</span>
+                            <span>{link.name}</span>
                           </Link>
                         </li>
                       ))}
@@ -444,7 +274,7 @@ const NavigationMenu = () => {
           </div>
         )
       ))}
-    </div>
+    </>  
   );
 };
 
