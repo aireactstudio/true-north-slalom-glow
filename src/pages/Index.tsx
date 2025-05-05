@@ -23,9 +23,6 @@ const Index = () => {
         description="We manage IT, cloud and security so you can focus on your patients"
         buttonText="Discover Our Services"
         buttonLink="/services"
-        backgroundImage="/lovable-uploads/fe11fbd3-8a3c-4b73-9c5d-807dce50204b.png"
-        backgroundVideo="/videos/hero-video.mp4"
-        // The image above will be used as a poster frame until the video loads
       />
       
       <ServicesOverview />
