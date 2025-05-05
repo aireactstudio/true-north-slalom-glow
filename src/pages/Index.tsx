@@ -3,10 +3,15 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import SectionDivider from '@/components/SectionDivider';
+import TabsSection from '@/components/TabsSection';
 import ServicesOverview from '@/components/ServicesOverview';
 import StatsSection from '@/components/StatsSection';
+import MapSection from '@/components/MapSection';
 // import SlidingBlocks from '@/components/SlidingBlocks'; // Temporarily commented out
-import FeaturedContent from '@/components/FeaturedContent';
+import HealthcareSection from '@/components/HealthcareSection';
+import EHRSection from '@/components/EHRSection';
+import TrustReasons from '@/components/TrustReasons';
+import FAQ from '@/components/FAQ';
 import Testimonials from '@/components/Testimonials';
 import CTA from '@/components/CTA';
 import Partners from '@/components/Partners';
@@ -32,70 +37,93 @@ const Index = () => {
       
       <StatsSection />
       
+      <TabsSection 
+        tabs={[
+          {
+            id: 'managed-cloud',
+            title: 'Managed Cloud',
+            content: {
+              heading: 'Accelerate Physician Performance and Eliminate Downtime',
+              services: [
+                'Cloud Hosting with True North',
+                'AWS and Azure Managed Cloud Services',
+                'Hybrid Cloud Managed Services',
+                'Clinical Workflow Optimization',
+                'EMR/EHR Hosting and Optimization'
+              ],
+              primaryCta: {
+                text: 'REQUEST MY CONSULTATION',
+                href: '/consultation'
+              },
+              secondaryCta: {
+                text: 'DOWNLOAD EHR PERFORMANCE REPORT',
+                href: '/download-report'
+              }
+            }
+          },
+          {
+            id: 'security-dr',
+            title: 'Managed Security & DR',
+            content: {
+              heading: 'Securing Patient Data from Theft and Disaster',
+              services: [
+                'HIPAA Real Time Security Monitoring',
+                'Disaster Recovery & Business Continuity',
+                'Security & Compliance Solutions',
+                'Patches & Upgrades',
+                'Ransomware Protection'
+              ],
+              primaryCta: {
+                text: 'REQUEST MY CONSULTATION',
+                href: '/consultation'
+              },
+              secondaryCta: {
+                text: 'REQUEST A NETWORK SECURITY AUDIT',
+                href: '/security-audit'
+              }
+            }
+          },
+          {
+            id: 'managed-it',
+            title: 'Managed IT Solutions',
+            content: {
+              heading: 'Transform Healthcare IT and Reduce IT Issues',
+              services: [
+                'IT Staff Augmentation & Support',
+                'Healthcare Focused IT Management',
+                'IT Consulting & Professional Services',
+                'Clinical IT Workflow Support and Optimization'
+              ],
+              primaryCta: {
+                text: 'REQUEST MY CONSULTATION',
+                href: '/consultation'
+              },
+              secondaryCta: {
+                text: 'DOWNLOAD HIPAA COMPLIANCE CHECKLIST',
+                href: '/hipaa-checklist'
+              }
+            }
+          }
+        ]}
+      />
+      
       {/* SlidingBlocks component temporarily removed */}
       
-      <section className="py-20 bg-tnorth-surface-dark text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Healthcare IT Solutions</h2>
-              <p className="text-xl mb-8">
-                Some of the most important IT solutions for healthcare providers to consider include Electronic Health Records (EHRs), 
-                telemedicine, clinical decision support systems (CDSS), Internet of Medical Things (IoMT), and Artificial Intelligence (AI).
-              </p>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <svg className="h-6 w-6 text-tnorth-accent mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>EHRs enable you to store, manage, and exchange patient information digitally, ensuring timely access to accurate medical records.</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="h-6 w-6 text-tnorth-accent mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>Telemedicine allows healthcare professionals to remotely evaluate, diagnose, and treat patients, enhancing access to services.</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="h-6 w-6 text-tnorth-accent mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>CDSS provide evidence-based clinical guidelines and data analysis tools that assist in making informed decisions.</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="h-6 w-6 text-tnorth-accent mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>IoMT devices, such as wearables and remote monitoring systems, help you continuously monitor patients and collect data.</span>
-                </li>
-                <li className="flex items-start">
-                  <svg className="h-6 w-6 text-tnorth-accent mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>AI uses predictive analytics, medical imaging analysis, and natural language processing to help identify patterns.</span>
-                </li>
-              </ul>
-            </div>
-            <div className="relative">
-              <img 
-                src="/lovable-uploads/94ddb473-c6e9-4b17-8148-019e545e1860.png" 
-                alt="Healthcare IT professionals" 
-                className="rounded-lg shadow-xl"
-              />
-              <div className="absolute -bottom-6 -right-6 bg-tnorth p-4 rounded-lg shadow-lg hidden md:block">
-                <div className="text-4xl font-bold">15+</div>
-                <div className="text-sm">Years of healthcare IT expertise</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+
       
-      <FeaturedContent />
+      <HealthcareSection />
+      
+      <EHRSection />
+      
+      <TrustReasons />
+      
+      <FAQ />
       
       <Testimonials />
       
       <Partners />
+      
+      <MapSection />
       
       <ContactForm />
       

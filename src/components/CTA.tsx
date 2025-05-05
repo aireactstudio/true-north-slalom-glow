@@ -15,7 +15,7 @@ const CTA: React.FC<CTAProps> = ({
   description,
   buttonText,
   buttonLink,
-  backgroundImage = "/lovable-uploads/5eed2065-379d-48f8-84dc-1c138fb424c6.png",
+  backgroundImage = "/images/contact.jpg",
 }) => {
   return (
     <section className="relative py-20 overflow-hidden">
