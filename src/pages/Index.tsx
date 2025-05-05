@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ServicesOverview from '@/components/ServicesOverview';
 import StatsSection from '@/components/StatsSection';
-import SlidingBlocks from '@/components/SlidingBlocks';
+// import SlidingBlocks from '@/components/SlidingBlocks'; // Temporarily commented out
 import FeaturedContent from '@/components/FeaturedContent';
 import Testimonials from '@/components/Testimonials';
 import CTA from '@/components/CTA';
@@ -24,13 +24,15 @@ const Index = () => {
         buttonText="Discover Our Services"
         buttonLink="/services"
         backgroundImage="/lovable-uploads/fe11fbd3-8a3c-4b73-9c5d-807dce50204b.png"
+        backgroundVideo="/videos/hero-video.mp4"
+        // The image above will be used as a poster frame until the video loads
       />
       
       <ServicesOverview />
       
       <StatsSection />
       
-      <SlidingBlocks />
+      {/* SlidingBlocks component temporarily removed */}
       
       <section className="py-20 bg-tnorth-surface-dark text-white">
         <div className="container mx-auto px-4">

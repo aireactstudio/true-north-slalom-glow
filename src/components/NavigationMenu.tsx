@@ -238,31 +238,46 @@ const NavigationMenu = () => {
         item.megaMenu.length > 0 && (
           <div 
             key={`mega-${item.title}`}
-            className={`bg-tnorth-dark/80 backdrop-blur-sm absolute w-full left-0 top-full z-50 overflow-hidden transition-all duration-300 ease-in-out ${
+            className={`bg-tnorth-dark/90 backdrop-blur-sm fixed w-full left-0 top-0 right-0 z-50 h-screen overflow-y-auto transition-all duration-300 ease-in-out ${
               activeMenu === item.title 
-                ? 'opacity-100 max-h-[800px] visible' 
-                : 'opacity-0 max-h-0 invisible'
+                ? 'opacity-100 visible translate-y-0' 
+                : 'opacity-0 invisible -translate-y-10'
             }`}
             onMouseEnter={() => handleMegaMenuEnter(item.title)}
             onMouseLeave={handleMenuLeave}
           >
-            <div className="container mx-auto py-12 px-4 md:px-6 max-w-7xl">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="container mx-auto pt-28 pb-20 px-4 md:px-6 max-w-7xl min-h-screen flex flex-col">
+              {/* Close button */}
+              <div className="flex justify-end mb-6">
+                <button 
+                  onClick={() => setActiveMenu(null)}
+                  className="text-white hover:text-tnorth-accent p-2 transition-colors duration-200"
+                  aria-label="Close menu"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+              
+              {/* Menu title */}
+              <h2 className="text-3xl font-bold text-white mb-8 border-b border-white/20 pb-4">{item.title}</h2>
+              
+              {/* Grid of sections */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 flex-grow">
                 {item.megaMenu.map((section, idx) => (
                   <div key={`section-${idx}`} className="space-y-6">
-                    <h3 className="text-white text-xl font-medium drop-shadow-md">
+                    <h3 className="text-white text-xl font-medium drop-shadow-md border-l-4 border-tnorth-accent pl-4">
                       {section.title}
                     </h3>
-                    <ul className="space-y-3">
+                    <ul className="space-y-4">
                       {section.links.map((link, linkIdx) => (
                         <li key={`link-${linkIdx}`}>
                           <Link 
                             to={link.href} 
-                            className="text-white/90 hover:text-white flex items-center space-x-1 group drop-shadow-sm"
+                            className="text-white/90 hover:text-white flex items-center space-x-2 group drop-shadow-sm py-1"
                             onClick={() => setActiveMenu(null)}
                           >
-                            <span className="text-white/70 group-hover:text-tnorth-accent">›</span>
-                            <span>{link.name}</span>
+                            <span className="text-tnorth-accent group-hover:text-white">›</span>
+                            <span className="group-hover:translate-x-1 transition-transform duration-200">{link.name}</span>
                           </Link>
                         </li>
                       ))}

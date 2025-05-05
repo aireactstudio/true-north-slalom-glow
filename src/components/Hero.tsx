@@ -10,6 +10,8 @@ interface HeroProps {
   buttonText?: string;
   buttonLink?: string;
   backgroundImage?: string;
+  backgroundVideo?: string;
+  posterImage?: string; // Thumbnail for video before it loads
   overlayOpacity?: number;
 }
 
@@ -20,32 +22,51 @@ const Hero: React.FC<HeroProps> = ({
   buttonText = "Learn More",
   buttonLink = "#",
   backgroundImage = "/lovable-uploads/fe11fbd3-8a3c-4b73-9c5d-807dce50204b.png",
+  backgroundVideo,
+  posterImage,
   overlayOpacity = 0.7,
 }) => {
   const isMobile = useIsMobile();
 
   return (
     <div className="relative min-h-[80vh] md:min-h-screen flex items-center w-full">
-      {/* Background image */}
+      {/* Background media (image or video) */}
+      {backgroundVideo ? (
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={posterImage || backgroundImage}
+            className="absolute w-full h-full object-cover"
+          >
+            <source src={backgroundVideo} type="video/mp4" />
+            {/* Fallback to image if video can't be played */}
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      ) : (
+        <div 
+          className="absolute inset-0 bg-cover bg-center z-0" 
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        />
+      )}
+      
+      {/* Overlay - reduced opacity gradient to showcase the background better */}
       <div 
-        className="absolute inset-0 bg-cover bg-center z-0" 
-        style={{ backgroundImage: `url(${backgroundImage})` }}
+        className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30 z-10"
       />
       
-      {/* Overlay - using a gradient overlay instead of a flat color for a more modern look */}
-      <div 
-        className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50 z-10"
-      />
-      
-      {/* Content */}
-      <div className="container mx-auto px-4 z-20 pt-24 w-full">
-        <div className="max-w-4xl">
+      {/* Content - flush with left edge */}
+      <div className="relative z-20 pt-24 w-full">
+        <div className="max-w-xl px-4 sm:px-6 md:px-8">
           {subtitle && (
             <p className="text-white text-base md:text-lg mb-3 md:mb-4 animate-fade-in font-medium tracking-wide drop-shadow-md">
               {subtitle}
             </p>
           )}
-          <h1 className={`text-3xl md:text-5xl lg:text-6xl text-white font-bold mb-4 md:mb-6 leading-tight animate-fade-in drop-shadow-md`} style={{ animationDelay: '0.1s' }}>
+          <h1 className={`text-2xl md:text-4xl lg:text-5xl text-white font-bold mb-3 md:mb-4 leading-tight animate-fade-in drop-shadow-md`} style={{ animationDelay: '0.1s' }}>
             {title.split('\n').map((line, i) => (
               <React.Fragment key={i}>
                 {line}
@@ -54,14 +75,14 @@ const Hero: React.FC<HeroProps> = ({
             ))}
           </h1>
           {description && (
-            <p className="text-lg md:text-2xl text-white/90 mb-6 md:mb-8 max-w-3xl animate-fade-in drop-shadow-sm" style={{ animationDelay: '0.2s' }}>
+            <p className="text-base md:text-xl text-white/90 mb-4 md:mb-6 max-w-lg animate-fade-in drop-shadow-sm" style={{ animationDelay: '0.2s' }}>
               {description}
             </p>
           )}
           {buttonText && (
             <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
               <Button 
-                className="bg-transparent hover:bg-white text-white hover:text-blue-900 border-2 border-white px-6 md:px-8 py-3 md:py-4 text-base md:text-lg h-auto rounded-full transition-colors duration-300"
+                className="bg-transparent hover:bg-white text-white hover:text-blue-900 border-2 border-white px-5 md:px-6 py-2 md:py-3 text-sm md:text-base h-auto rounded-full transition-colors duration-300"
                 asChild
               >
                 <a href={buttonLink}>{buttonText}</a>

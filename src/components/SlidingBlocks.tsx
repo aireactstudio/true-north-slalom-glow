@@ -14,8 +14,18 @@ import React from 'react';
 // - Responsive layout for all screen sizes
 */
 
+// Define interface to match any props that might be passed from parent components
+interface SlidingBlocksProps {
+  [key: string]: any; // This allows for any props to be passed
+}
+
 // Empty placeholder component
-const SlidingBlocks: React.FC = () => {
+const SlidingBlocks: React.FC<SlidingBlocksProps> = (props) => {
+  // Just log that it was called but render nothing
+  React.useEffect(() => {
+    console.log('SlidingBlocks component mounted but configured to render nothing');
+  }, []);
+  
   return null; // Return null to render nothing
 };
 
