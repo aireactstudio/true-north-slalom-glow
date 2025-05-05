@@ -2,6 +2,7 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import SectionDivider from '@/components/SectionDivider';
 import ServicesOverview from '@/components/ServicesOverview';
 import StatsSection from '@/components/StatsSection';
 // import SlidingBlocks from '@/components/SlidingBlocks'; // Temporarily commented out
@@ -24,6 +25,8 @@ const Index = () => {
         buttonText="Discover Our Services"
         buttonLink="/services"
       />
+      
+      <SectionDivider className="relative z-10" />
       
       <ServicesOverview />
       

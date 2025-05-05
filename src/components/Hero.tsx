@@ -77,7 +77,7 @@ const Hero: React.FC<HeroProps> = ({
     if (isAutoRotating && allMedia.length > 1) {
       rotationTimer = window.setTimeout(() => {
         setCurrentIndex((prev) => (prev + 1) % allMedia.length);
-      }, 4000); // 4 seconds per slide
+      }, 6000); // 6 seconds per slide
     }
     
     return () => {
@@ -106,29 +106,28 @@ const Hero: React.FC<HeroProps> = ({
 
   return (
     <div className="relative min-h-[80vh] md:min-h-screen flex items-center w-full">
-      {/* Background media (image or video) */}
-      {currentMedia?.type === 'video' ? (
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <video
-            ref={videoRef}
-            autoPlay={isPlaying}
-            muted
-            loop
-            playsInline
-            poster={posterImage || backgroundImage}
-            className="absolute w-full h-full object-cover"
-          >
-            <source src={currentMedia.src} type="video/mp4" />
-            {/* Fallback to image if video can't be played */}
-            Your browser does not support the video tag.
-          </video>
+      {/* Background media (always video in this case) */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {/* Key changes to force recreation of video element when source changes */}
+        <video
+          key={currentMedia.src} 
+          ref={videoRef}
+          autoPlay={isPlaying}
+          muted
+          loop
+          playsInline
+          className="absolute w-full h-full object-cover"
+        >
+          <source src={currentMedia.src} type="video/mp4" />
+          {/* Fallback if video can't be played */}
+          Your browser does not support the video tag.
+        </video>
+        
+        {/* Debug info - remove in production */}
+        <div className="absolute top-0 left-0 bg-black/70 text-white text-xs p-1 z-50">
+          Current video: {currentMedia.src.split('/').pop()}
         </div>
-      ) : (
-        <div 
-          className="absolute inset-0 bg-cover bg-center z-0" 
-          style={{ backgroundImage: `url(${currentMedia?.src || backgroundImage})` }}
-        />
-      )}
+      </div>
       
       {/* Overlay - reduced opacity gradient to showcase the background better */}
       <div 
